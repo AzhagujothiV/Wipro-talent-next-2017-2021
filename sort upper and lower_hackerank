@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        int MAX=100;
+        String s1="";
+        Scanner sc= new Scanner(System.in);
+        s1=sc.nextLine();
+        int n = s1.length(); 
+  
+    char[] s = s1.toCharArray(); 
+    char[] result1 = new char[n];
+    char[] result2 = new char[n];
+  
+    // Count occurrences of  
+    // individual lower case and 
+    // upper case characters 
+     int count1 =0;
+     int count2=0;
+  
+    for (int i = 0; i<n;i++) { 
+  
+        if (Character.isUpperCase(s[i])) 
+            {
+                result1[count1]=s[i];
+                count1++;
+            } 
+        else
+            {
+                result2[count2]=s[i];
+                count2++;
+            }
+    } 
+  
+        String res1=new String(result1); 
+        String res2=new String(result2); 
+        String s2=res2+res1;
+        String s4=res2.concat(res1);
+        
+        System.out.println(s4);
+    }
+}
