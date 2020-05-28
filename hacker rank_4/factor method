@@ -1,0 +1,33 @@
+class Result {
+
+    /*
+     * Complete the 'pthFactor' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts following parameters:
+     *  1. LONG_INTEGER n
+     *  2. LONG_INTEGER p
+     */
+     Scanner sc=new Scanner(System.in);
+     long n=sc.nextLong();
+     Scanner sc1=new Scanner (System.in);
+     long p=sc1.nextLong();
+
+
+    public static long pthFactor(long n, long p) {
+    // Write your code here
+    long a[]=new long[10];
+     for(long i=0;i<=n;i++)
+     {
+         if(n%i==0)
+         {
+             
+             if(i==p)
+             {
+                 long result=a[i];
+             }
+     }
+     return result;
+    }
+
+}
