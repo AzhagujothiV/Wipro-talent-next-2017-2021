@@ -1,0 +1,85 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'largestArea' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY samples as parameter.
+     */
+
+    public static int largestArea(List<List<Integer>> samples) {
+    // Write your code here
+    int[][] M=new int[samples.size()];
+    for(int i=0;i<samples.size();i++)
+    {
+        M=samples.get(i);
+    }
+    int n,m;
+    if(m==0 || n==0)
+    {
+        max_size.set(Integer.max(max_size.get(),M[m][n]));
+        return M[m][n];
+    }
+    int left=findLargestSquare(M,m,n-1,max_size);
+    int top=findLargestsquare(M,m-1,n,max_size);
+    int diagonal=findLargestSquare(M,m-1,n-1,max_size);
+
+    int size=0;
+    if(M[m][n]!=0)
+    {
+        size=1+Integer.min(Integer.min(top,left),diagonal);
+    }
+    max_size.set(Integer.max(max_size.get(),size));
+
+    return size;
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int samplesRows = Integer.parseInt(bufferedReader.readLine().trim());
+        int samplesColumns = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<List<Integer>> samples = new ArrayList<>();
+
+        IntStream.range(0, samplesRows).forEach(i -> {
+            try {
+                samples.add(
+                    Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                        .map(Integer::parseInt)
+                        .collect(toList())
+                );
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        int result = Result.largestArea(samples);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
