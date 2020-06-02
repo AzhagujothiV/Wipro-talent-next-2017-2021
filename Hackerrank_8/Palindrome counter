@@ -1,0 +1,64 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+class Result {
+
+    /*
+     * Complete the 'countPalindromes' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static int countPalindromes(String s) {
+    // Write your code here
+    int N=s.length();
+
+    int c[][]=new int[N+1][N+1];
+    for(int i=0;i<N;i++)
+    {
+        c[i][i]=1;
+    }
+    for(int l=2;l<=N;l++)
+    {
+        for(int i=0;i<N;i++)
+        {
+            int k=l+i-1;
+            if(k<N)
+            {
+                if(s.charAt(i)==s.charAt(k))
+                {
+                    c[i][k]=c[i][k-1] + c[i+1][k] +1;
+                }
+                else
+                {
+                    c[i][k]=c[i][k-1]+ c[i+1][k] -c[i+1][k-1];
+                }
+            }
+        }
+    }
+    return c[0][N-1];
+    }
+}
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        int result = Result.countPalindromes(s);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
