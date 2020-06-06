@@ -1,0 +1,70 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'getTime' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static long getTime(String s) {
+    // Write your code here
+    char arr[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char strarray[] = s.toCharArray();
+   char position = arr[26];
+   int posindex = 26;
+   int countleft = 0;
+   int countright = 0;
+   
+   for (char c : strarray) {
+   for(int i=posindex;i<arr.length;i++)
+   {
+       
+       if(arr[i]==c)
+       {
+           countright = i;
+           
+       }
+   }
+
+   if(countleft<countright)
+   {
+       result = result + countleft;
+       posindex = countleft;
+   }
+   else
+   {
+   result = result + countright;
+   posindex = countright;
+   }
+    }
+    return result;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        long result = Result.getTime(s);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
