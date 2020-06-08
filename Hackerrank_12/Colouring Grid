@@ -1,0 +1,73 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'countPatterns' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts INTEGER n as parameter.
+     */
+     coloring3NBlocks=new Coloring3NBlocks();
+      @Test
+      public void firstTest()
+      {
+          int res=coloring3NBlocks.countPatterns(n);
+          Assertions.assertEquals(12,res);
+
+      }
+      @Test
+      public void second()
+      {
+          int res=coloring3NBlocks.countPatterns(n);
+          Assertions.assertEquals(54,res);
+
+      }
+      @Test
+      public void third()
+      {
+          int res=coloring3NBlocks.countPatterns(n);
+          Assertions.assertEquals(246,res);
+      }
+
+    public static int countPatterns(int n) {
+    // Write your code here
+          long mod=(long)  1e9+ 7;
+          long pt1=6;
+          long pt2=6;
+          for(int i=0;i<n;++i)
+          {
+             long x=pt1*3+pt2*2;
+             long y=pt1*2+pt2*2;
+              pt1=x%mod;
+              pt2=y%mod;
+
+          }
+          return (int)((pt1+pt2)%mod);
+      }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int result = Result.countPatterns(n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
