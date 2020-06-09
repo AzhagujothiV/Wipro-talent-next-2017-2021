@@ -1,0 +1,79 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+class Result {
+
+    /*
+     * Complete the 'itemsSort' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY items as parameter.
+     */
+
+    public static List<Integer> itemsSort(List<Integer> items) {
+    // Write your code here
+    int arr[]=new int[items.size()];
+    for(int i=0;i<items.size();i++)
+    {
+        arr[i]=items.get(i);
+    }
+    Arrays.sort(arr);
+    int ary[]=new int[arr.length];
+    int vry[]=new int[arr.length];
+    for(int j=0;j<arr.length;j++)
+    {
+        for(int k=1;k<arr.length;k++)
+        {
+        if(arr[j]==arr[k])
+        {
+            ary[j]=arr[j];
+            ary[k]=arr[k];
+        }
+        else
+        {
+            vry[j]=arr[j];
+        }
+        }
+    }
+    List<int[]> values=new ArrayList<int[]>();
+     values.put(vry);
+     values.put(ary);
+     return values;
+    }
+}
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int itemsCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> items = new ArrayList<>();
+
+        for (int i = 0; i < itemsCount; i++) {
+            int itemsItem = Integer.parseInt(bufferedReader.readLine().trim());
+            items.add(itemsItem);
+        }
+
+        List<Integer> result = Result.itemsSort(items);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
