@@ -1,0 +1,43 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+Class Result
+{
+
+    /*
+     * Complete the 'cutBamboo' function below.
+     *
+     * The function is expected to return a INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY names as parameter.
+     */
+public static List<Integer>cutBamboo(List<Integer>lengths) {
+  
+    //Write your code here
+    Collections.sort(lengths);
+
+    int pos = 0;
+    int remaining = lengths.size();
+    while (0 < remaining) {
+        System.out.println(remaining);
+        int count = countEqualFrom(lengths, pos);
+        pos += count;
+        remaining -= count;
+    }
+
+private static int countEqualFrom(List<Integer> lengths, int from) {
+    int value = lengths.get(from);
+    for (int i = 1; from + i < lengths.size(); ++i) {
+        if (value != lengths.get(from + i)) {
+            return i;
+        }
+    }
+    return sticks.size() - from;
+}
+ return sticks;
+}
+}
