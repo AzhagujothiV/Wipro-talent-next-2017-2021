@@ -1,0 +1,145 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'doesCircleExist' function below.
+     *
+     * The function is expected to return a STRING_ARRAY.
+     * The function accepts STRING_ARRAY commands as parameter.
+     */
+
+    public static List<String> doesCircleExist(List<String> commands) {
+    // Write your code here
+    int initialX=0;
+    int initialY=0;
+
+    int x=0;
+    int y=0;
+    String direction="north";
+    for(int i=0;i<commands.size();i++)
+    {
+        if(direction.equals("north"))
+        {
+            if(commands.charAt(i)=='G')
+            {
+                y++;
+            }
+            else if(commands.charAt(i)=='L')
+            {
+                direction="west";
+            }
+            else if(commands.charAt(i)=='R')
+            {
+                direction="east";
+            }
+            else{
+                  return 0;
+            }
+            }
+        else if(direction.equals("east"))
+        {
+            if(commands.charAt(i)=='G')
+            {
+                x++;
+            }
+            else if(commands.charAt(i)=='L')
+            {
+                direction="north";
+            }
+            else if(commands.charAt(i)=='R')
+            {
+                direction="south";
+            }   
+            else{
+                return 1;
+            }
+        }
+        else if (direction.equals("south")){
+           if(commands.charAt(i)=='G')
+           {
+               x--;
+           }
+           else if(commands.charAt(i)=='L')
+           {
+               direction="east";
+           }
+           else if(commands.charAt(i)=='R')
+           {
+               direction="west";
+           }
+           else
+           {
+               return 1;
+           }
+        }
+        else if(direction.equals("west"))
+        {
+            if(commands.charAt(i)=='G')
+            {
+                x--;
+            }
+            else if(commands.charAt(i)=='L')
+            {
+                direction="south";
+
+            }
+            else if(commands.charAt(i)=='R')
+            {
+                direction="north";
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        if(direction.equals("north")&&(((x-initialX)*(x-initialX)+(y-initialY)*(y-initialY))>0))
+        {
+        return "no";
+        }
+        else{
+            return "yes";
+        }
+
+    }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int commandsCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<String> commands = new ArrayList<>();
+
+        for (int i = 0; i < commandsCount; i++) {
+            String commandsItem = bufferedReader.readLine();
+            commands.add(commandsItem);
+        }
+
+        List<String> result = Result.doesCircleExist(commands);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(result.get(i));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
