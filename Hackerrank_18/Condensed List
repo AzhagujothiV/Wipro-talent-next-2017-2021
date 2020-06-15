@@ -1,0 +1,133 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class SinglyLinkedListNode {
+    public int data;
+    public SinglyLinkedListNode next;
+
+    public SinglyLinkedListNode(int nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+}
+
+class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
+
+    public SinglyLinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public void insertNode(int nodeData) {
+        SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+        if (this.head == null) {
+            this.head = node;
+        } else {
+            this.tail.next = node;
+        }
+
+        this.tail = node;
+    }
+}
+
+class SinglyLinkedListPrintHelper {
+    public static void printList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
+        while (node != null) {
+            bufferedWriter.write(String.valueOf(node.data));
+
+            node = node.next;
+
+            if (node != null) {
+                bufferedWriter.write(sep);
+            }
+        }
+    }
+}
+
+
+class Result {
+
+    /*
+     * Complete the 'condense' function below.
+     *
+     * The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+     * The function accepts INTEGER_SINGLY_LINKED_LIST head as parameter.
+     */
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+     static class Node{
+     int data;
+     Node next;
+     Node(int d)
+     {
+         data =d;
+         next=null;
+     }
+     }
+
+    public static SinglyLinkedListNode condense(SinglyLinkedListNode head) {
+    // Write your code here
+       Node ptr1=null,ptr2=null,dup=null;
+       ptr1=head;
+
+       while(ptr1!=null&& ptr1.next!=null)
+       {
+           ptr2=ptr1;
+       }
+       while(ptr2.next!=null)
+       {
+           if(ptr1.data==ptr2.next.data)
+           {
+               dup=ptr2.next;
+               ptr2.next=ptr2.next.next;
+               System.gc();
+           }
+           else{
+               ptr2=ptr2.next;
+          
+           }
+       }
+       ptr1=ptr1.next;
+    }
+
+}
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        SinglyLinkedList head = new SinglyLinkedList();
+
+        int headCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int i = 0; i < headCount; i++) {
+            int headItem = Integer.parseInt(bufferedReader.readLine().trim());
+
+            head.insertNode(headItem);
+        }
+
+        SinglyLinkedListNode result = Result.condense(head.head);
+
+        SinglyLinkedListPrintHelper.printList(result, "\n", bufferedWriter);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
