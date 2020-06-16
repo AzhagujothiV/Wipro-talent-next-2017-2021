@@ -1,0 +1,66 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'arrangeEquipments' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY equipments as parameter.
+     */
+
+    public static List<Integer> arrangeEquipments(List<Integer> equipments) {
+    // Write your code here
+         int val;
+         for(int i=0;i<equipments.size();i++)
+         {
+             val=equipments.get(i);
+             equipments.listIterator(i);
+             for(int j=0;j<equipments.size();j++)
+             {
+               val=equipments(j)*equipments(j+1)*(1/equipments(i+2))*equipments(j+3);
+             }
+         }
+         return val;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int equipmentsCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> equipments = new ArrayList<>();
+
+        for (int i = 0; i < equipmentsCount; i++) {
+            int equipmentsItem = Integer.parseInt(bufferedReader.readLine().trim());
+            equipments.add(equipmentsItem);
+        }
+
+        List<Integer> result = Result.arrangeEquipments(equipments);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
