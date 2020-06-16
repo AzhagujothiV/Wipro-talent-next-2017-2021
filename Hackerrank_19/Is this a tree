@@ -1,0 +1,66 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'sExpression' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING nodes as parameter.
+     */
+     class Node
+     {
+         int data;
+         Node left;
+         Node right;
+
+     }
+
+    public static String sExpression(String nodes) {
+    // Write your code here
+       String rev="";
+       if(nodes==null)
+       {
+           rev=true;
+       }
+       if(nodes.data<min || nodes.data> max)
+       {
+           rev=false;
+       }
+       if(nodes.left!=null && nodes.right !=null)
+       {
+           if(nodes.left.data)> nodes.data || nodes.right.data<nodes.data)
+           {
+               return false;
+           }
+       }
+
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String nodes = bufferedReader.readLine();
+
+        String result = Result.sExpression(nodes);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
